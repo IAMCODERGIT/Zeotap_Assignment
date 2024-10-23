@@ -1,5 +1,5 @@
 # Zeotap_Assignment - Pritish Pawar
-# Application 1: Rule Engine with AST
+# Application 1: Rule Engine with AST 
 1.	Backend (Spring Boot - Java)
 
 # 1.1. Dependencies in pom.xml (for Maven)
@@ -33,6 +33,7 @@
 </dependencies>
 
 # 1.2. Defining AST Structure in Java
+
 public class Node {
     private String type;      
     private Node left;        
@@ -51,17 +52,14 @@ public class Node {
         this.type = type;
         this.value = value;
     }
-
 }
 
 # 1.3. Rule Service
-import org.springframework.stereotype.Service;
 
+import org.springframework.stereotype.Service;
 @Service
 public class RuleEngineService {
-
-    
-    public Node createRule(String ruleString) {
+public Node createRule(String ruleString) {
         
         Node ageNode = new Node("operand", "age > 30");
         Node deptNode = new Node("operand", "department = 'Sales'");
@@ -109,13 +107,12 @@ public class RuleEngineService {
         return false;
     }
 }
+
 # 1.4. Controller (REST API)
 
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.Map;
-
 @RestController
 @RequestMapping("/api/rules")
 public class RuleEngineController {
@@ -145,20 +142,21 @@ public class RuleEngineController {
         return ruleEngineService.evaluateRule(root, userData);
     }
 }
-# 1.5. Database Schema 
+
+# 1.5. Database Schema (For Rules Storage)
+
 CREATE TABLE rules (
     id INT AUTO_INCREMENT PRIMARY KEY,
     rule_string TEXT,
-    ast_structure TEXT --Can store the AST in JSON format
+    ast_structure TEXT -- Can store the AST in JSON format
 );
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Application 2: Real-Time Weather Data Processing
 Steps for Weather Monitoring Application:
-
 1.	Backend (Spring Boot - Java)
 
 # 1.1. Dependencies in pom.xml
-
 <dependencies>
     <!-- Spring Boot Starter -->
     <dependency>
@@ -166,19 +164,19 @@ Steps for Weather Monitoring Application:
         <artifactId>spring-boot-starter</artifactId>
     </dependency>
 
-    <!-- Spring Web (for REST API calls) -->
+<!-- Spring Web (for REST API calls) -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <!-- MongoDB Driver (optional if using MongoDB) -->
+<!-- MongoDB Driver (optional if using MongoDB) -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-mongodb</artifactId>
     </dependency>
 
-    <!-- RestTemplate for API calls -->
+<!-- RestTemplate for API calls -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
@@ -186,10 +184,8 @@ Steps for Weather Monitoring Application:
 </dependencies>
 
 # 1.2. Service to Call OpenWeatherMap API
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 @Service
 public class WeatherService {
     private final String API_KEY = "your_openweathermap_api_key";
@@ -213,20 +209,16 @@ public class WeatherData {
     private long dt;
     private String name;
 
-    // getters and setters
-
+//Defining Setter & Getter
     public static class Main {
         private double temp;
         private double feels_like;
-
-       
-    }
+        }
 }
 
 # 1.4. Controller for Weather Data
 
 import org.springframework.web.bind.annotation.*;
-
 @RestController
 @RequestMapping("/api/weather")
 public class WeatherController {
@@ -249,7 +241,6 @@ public class WeatherController {
 # 1.5. Aggregation and Rollups Service
 
 import java.util.List;
-
 @Service
 public class WeatherAggregationService {
 
